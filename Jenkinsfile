@@ -136,6 +136,8 @@ node {
     stage("Setup Dependencies") {
       def prDetection = detectPullRequest(currentBuild);
 
+      echo "all causes: ${causes}"
+
       if (prDetection.isSuccess) {
         echo "pull request id = ${prDetection.pullRequestId}";
         echo "pull request status = ${prDetection.pullRequestStatus}";
@@ -154,4 +156,13 @@ node {
   }
 }
 
-// 123
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
