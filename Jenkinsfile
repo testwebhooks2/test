@@ -134,7 +134,9 @@ def causes = currentBuild.rawBuild.getCauses().collect { it.getShortDescription(
 node {
   try {
     stage("Setup Dependencies") {
-        
+      
+      checkout scm
+      
       populateGlobalVariables()
         
       echo "getLastCommitMessage: ${getLastCommitMessage}"
