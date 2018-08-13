@@ -134,7 +134,14 @@ def causes = currentBuild.rawBuild.getCauses().collect { it.getShortDescription(
 node {
   try {
     stage("Setup Dependencies") {
+
+      
+      checkout scm
+      
+      populateGlobalVariables()
         
+      echo "getLastCommitMessage: ${message}"
+
       echo "GITHUB_PR_STATE: ${env.GITHUB_PR_STATE}"
       echo "GITHUB_PR_COMMENT_BODY: ${env.GITHUB_PR_COMMENT_BODY}"
       echo "GITHUB_PR_COMMIT_AUTHOR_NAME: ${env.GITHUB_PR_COMMIT_AUTHOR_NAME}"
@@ -142,6 +149,8 @@ node {
       echo "GITHUB_PR_LABELS1111111: ${env.GITHUB_PR_LABELS}"
 
       def prDetection = detectPullRequest(currentBuild);
+
+      echo "all causes: ${causes}"
 
       if (prDetection.isSuccess) {
         echo "pull request id = ${prDetection.pullRequestId}";
@@ -161,4 +170,13 @@ node {
   }
 }
 
-// 123
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
+// 1233321
