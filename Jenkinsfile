@@ -139,7 +139,7 @@ node {
       
       populateGlobalVariables()
         
-      echo "getLastCommitMessage: ${getLastCommitMessage}"
+      echo "getLastCommitMessage: ${message}"
 
       def prDetection = detectPullRequest(currentBuild);
 
