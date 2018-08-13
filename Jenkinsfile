@@ -134,6 +134,13 @@ def causes = currentBuild.rawBuild.getCauses().collect { it.getShortDescription(
 node {
   try {
     stage("Setup Dependencies") {
+      
+      checkout scm
+      
+      populateGlobalVariables()
+        
+      echo "getLastCommitMessage: ${message}"
+
       def prDetection = detectPullRequest(currentBuild);
 
       echo "all causes: ${causes}"
