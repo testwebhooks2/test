@@ -12,9 +12,6 @@ def populateGlobalVariables = {
     getGitAuthor()
 }
 
-echo "test var: ${env.test_var}";
-echo "pr number: ${env.pr_number}";
-
 // 111111
 // 2222
 ///3424234234
@@ -148,17 +145,20 @@ node {
       
       populateGlobalVariables()
         
-      echo "getLastCommitMessage: ${message}"
+      // echo "getLastCommitMessage: ${message}"
 
-      echo "GITHUB_PR_STATE: ${env.GITHUB_PR_STATE}"
-      echo "GITHUB_PR_COMMENT_BODY: ${env.GITHUB_PR_COMMENT_BODY}"
-      echo "GITHUB_PR_COMMIT_AUTHOR_NAME: ${env.GITHUB_PR_COMMIT_AUTHOR_NAME}"
-      echo "GITHUB_PR_NUMBER: ${env.GITHUB_PR_NUMBER}"
-      echo "GITHUB_PR_LABELS1111111: ${env.GITHUB_PR_LABELS}"
+      // echo "GITHUB_PR_STATE: ${env.GITHUB_PR_STATE}"
+      // echo "GITHUB_PR_COMMENT_BODY: ${env.GITHUB_PR_COMMENT_BODY}"
+      // echo "GITHUB_PR_COMMIT_AUTHOR_NAME: ${env.GITHUB_PR_COMMIT_AUTHOR_NAME}"
+      // echo "GITHUB_PR_NUMBER: ${env.GITHUB_PR_NUMBER}"
+      // echo "GITHUB_PR_LABELS1111111: ${env.GITHUB_PR_LABELS}"
+
+      echo "test var: ${env.test_var}";
+      echo "pr number: ${env.pr_number}";
 
       def prDetection = detectPullRequest(currentBuild);
 
-      echo "all causes: ${causes}"
+      // echo "all causes: ${causes}"
 
       if (prDetection.isSuccess) {
         echo "pull request id = ${prDetection.pullRequestId}";
