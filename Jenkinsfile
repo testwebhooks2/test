@@ -15,14 +15,21 @@ def populateGlobalVariables = {
 node {
   try {
     stage("Setup Dependencies") {
-
-      
       checkout scm
-      
       populateGlobalVariables()
 
-      echo "test var: ${params.test_var}";
-      echo "pr number: ${params.pr_number}";
+      echo(env.getEnvironment().collect({environmentVariable ->  "${environmentVariable.key} = ${environmentVariable.value}"}).join("\n"))
+
+      echo "test var: ${test_var}";
+      echo "pr number: ${pr_number}";
+
+      echo "env test var: ${env.test_var}";
+      echo "env pr number: ${env.pr_number}";
+
+      echo "params test var: ${params.test_var}";
+      echo "params pr number: ${params.pr_number}";
+    }
+
 
     }
   } catch(e) {
@@ -32,13 +39,3 @@ node {
   }
 }
 
-// 1233321
-// 1233321
-// 1233321
-// 1233321
-// 1233321
-// 1233321
-// 1233321
-// 1233321
-// 1233321
-// 1233321
