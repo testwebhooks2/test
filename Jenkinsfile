@@ -12,6 +12,9 @@ def populateGlobalVariables = {
     getGitAuthor()
 }
 
+echo "test var: ${env.test_var}";
+echo "pr number: ${env.pr_number}";
+
 // 111111
 // 2222
 ///3424234234
