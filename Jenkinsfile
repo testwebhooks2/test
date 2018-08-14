@@ -13,6 +13,12 @@ def populateGlobalVariables = {
 }
 
 node {
+  properties([
+    parameters([
+      string(defaultValue: '', description: '', name: 'TEST_VAR')
+    ])
+  ])
+
   try {
     stage("Setup Dependencies") {
       checkout scm
@@ -23,11 +29,11 @@ node {
       // echo "test var: ${test_var}";
       // echo "pr number: ${pr_number}";
 
-      echo "env test var: ${env.test_var}";
-      echo "env pr number: ${env.pr_number}";
+      // echo "env test var: ${env.test_var}";
+      // echo "env pr number: ${env.pr_number}";
 
-      echo "params test var: ${params.test_var}";
-      echo "params pr number: ${params.pr_number}";
+      echo "params test var: ${params.TEST_VAR}";
+      // echo "params pr number: ${params.pr_number}";
     }
   } catch(e) {
     currentBuild.result = "FAILED"
