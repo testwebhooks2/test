@@ -29,9 +29,6 @@ node {
       echo "params test var: ${params.test_var}";
       echo "params pr number: ${params.pr_number}";
     }
-
-
-    }
   } catch(e) {
     currentBuild.result = "FAILED"
     throw e
