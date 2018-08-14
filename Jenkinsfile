@@ -15,6 +15,8 @@ def populateGlobalVariables = {
 // 111111
 // 2222
 ////333333
+///3424234234
+// 33333
 
 // class MatcherResult {
 //   Boolean isSuccess;
@@ -138,12 +140,19 @@ def causes = currentBuild.rawBuild.getCauses().collect { it.getShortDescription(
 node {
   try {
     stage("Setup Dependencies") {
+
       
       checkout scm
       
       populateGlobalVariables()
         
       echo "getLastCommitMessage: ${message}"
+
+      echo "GITHUB_PR_STATE: ${env.GITHUB_PR_STATE}"
+      echo "GITHUB_PR_COMMENT_BODY: ${env.GITHUB_PR_COMMENT_BODY}"
+      echo "GITHUB_PR_COMMIT_AUTHOR_NAME: ${env.GITHUB_PR_COMMIT_AUTHOR_NAME}"
+      echo "GITHUB_PR_NUMBER: ${env.GITHUB_PR_NUMBER}"
+      echo "GITHUB_PR_LABELS1111111: ${env.GITHUB_PR_LABELS}"
 
       def prDetection = detectPullRequest(currentBuild);
 
