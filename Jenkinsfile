@@ -12,6 +12,12 @@ def populateGlobalVariables = {
     getGitAuthor()
 }
 
+def isPullRequest = env.CHANGE_ID != null
+def isMasterBranch = env.BRANCH_NAME == 'master'
+def isCleaningUp = params.REVIEW_APP_CLEANING == 'true'
+
+def autoCancelled = !isPullRequest && !isMasterBranch && !isCleaningUp
+
 node {
   properties([
     parameters([
@@ -22,23 +28,26 @@ node {
   ])
 
   try {
+    if (autoCancelled) {
+      error('Auto cancelling redundant build')
+    }
+
+    if (isCleaningUp) {
+      echo "Let's clean up this build! PR-${params.PR_NUMBER}, status: ${params.PR_STATUS}"
+    }
+
     stage("Setup Dependencies") {
       checkout scm
       populateGlobalVariables()
-
-      echo "CHANGE_ID: ${env.CHANGE_ID}";
-      echo "BRANCH NAME: ${env.BRANCH_NAME}";
-
-      if (params.REVIEW_APP_CLEANING == 'true') {
-        echo "PR NUMBER: ${params.PR_NUMBER}";
-        echo "PR STATUS: ${params.PR_STATUS}";
-      } else {
-        echo "NOT FROM SERVICE";
-      }
     }
   } catch(e) {
-    currentBuild.result = "FAILED"
-    throw e
+    if (autoCancelled) {
+      currentBuild.result = 'ABORTED'
+      return
+    } else {
+      currentBuild.result = "FAILED"
+      throw e
+    }
   } finally {
   }
 }
