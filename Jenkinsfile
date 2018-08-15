@@ -32,13 +32,16 @@ node {
       error('Auto cancelling redundant build')
     }
 
-    if (isCleaningUp) {
-      echo "Let's clean up this build! PR-${params.PR_NUMBER}, status: ${params.PR_STATUS}"
-    }
-
     stage("Setup Dependencies") {
       checkout scm
       populateGlobalVariables()
+    }
+
+    stage("Clean up review app") {
+      when { expression { isCleaningUp } }
+      steps {
+        echo "Let's clean up this build! PR-${params.PR_NUMBER}, status: ${params.PR_STATUS}"
+      }
     }
   } catch(e) {
     if (autoCancelled) {
