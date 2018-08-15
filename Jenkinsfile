@@ -26,6 +26,9 @@ node {
       checkout scm
       populateGlobalVariables()
 
+      echo "CHANGE_ID: ${env.CHANGE_ID}";
+      echo "BRANCH NAME: ${env.BRANCH_NAME}";
+
       if (params.REVIEW_APP_CLEANING == 'true') {
         echo "PR NUMBER: ${params.PR_NUMBER}";
         echo "PR STATUS: ${params.PR_STATUS}";
