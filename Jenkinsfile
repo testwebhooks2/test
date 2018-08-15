@@ -15,7 +15,7 @@ def populateGlobalVariables = {
 node {
   properties([
     parameters([
-      string(name: 'FROM_SERVICE', defaultValue: 'false'),
+      string(name: 'REVIEW_APP_CLEANING', defaultValue: 'false'),
       string(name: 'PR_NUMBER', defaultValue: ''),
       string(name: 'PR_STATUS', defaultValue: ''),
     ])
@@ -26,7 +26,7 @@ node {
       checkout scm
       populateGlobalVariables()
 
-      if (params.FROM_SERVICE == 'true') {
+      if (params.REVIEW_APP_CLEANING == 'true') {
         echo "PR NUMBER: ${params.PR_NUMBER}";
         echo "PR STATUS: ${params.PR_STATUS}";
       } else {
