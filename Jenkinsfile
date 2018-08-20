@@ -28,13 +28,24 @@ node {
   ])
 
   try {
-    if (autoCancelled) {
-      error('Auto cancelling redundant build')
-    }
+    // if (autoCancelled) {
+    //   error('Auto cancelling redundant build')
+    // }
 
     stage("Setup Dependencies") {
       checkout scm
       populateGlobalVariables()
+    }
+
+    // ### ----- Deploy to Review env ----
+    stage("Deploying to Review Env") {
+
+        if (env.CHANGE_ID) {
+            // pull request
+            echo "Current pull request: ${env.CHANGE_ID}"
+            sh "sed -i \"s/PR_NUMBER/${env.CHANGE_ID}/g\" docker-compose-review.yml"
+            sh "/usr/local/bin/docker-compose -f docker-compose-review.yml up --build --force-recreate"
+        }
     }
 
     if (isCleaningUp) {
@@ -42,6 +53,7 @@ node {
         echo "Let's clean up this build! PR-${params.PR_NUMBER}, status: ${params.PR_STATUS}"
       }
     }
+
   } catch(e) {
     if (autoCancelled) {
       currentBuild.result = 'ABORTED'
