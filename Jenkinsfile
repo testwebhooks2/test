@@ -27,6 +27,7 @@ node {
     ])
   ])
 
+    //111111111
   try {
     if (autoCancelled) {
       error('Auto cancelling redundant build')
