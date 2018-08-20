@@ -26,7 +26,7 @@ node {
       string(name: 'PR_STATUS', defaultValue: ''),
     ])
   ])
-
+// 22222222222
   try {
     if (autoCancelled) {
       error('Auto cancelling redundant build')
