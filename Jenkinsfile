@@ -28,11 +28,8 @@ node {
   ])
 
   try {
-    if (autoCancelled) {
-      error('Auto cancelling redundant build')
-    }
-
     stage("Setup Dependencies") {
+      echo "${workspace}"
       checkout scm
       populateGlobalVariables()
     }
