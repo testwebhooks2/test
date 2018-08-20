@@ -30,6 +30,7 @@ node {
   try {
     stage("Setup Dependencies") {
       echo "${workspace}"
+      echo "${env.JOB_NAME}"
       checkout scm
       populateGlobalVariables()
     }
