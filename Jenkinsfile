@@ -3,6 +3,8 @@ def getGitAuthor = {
     author = sh(returnStdout: true, script: "git --no-pager show -s --format='%an' ${commit}").trim()
 }
 
+// 123
+
 def getLastCommitMessage = {
     message = sh(returnStdout: true, script: 'git log -1 --pretty=%B').trim()
 }
